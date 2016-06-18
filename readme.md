@@ -7,7 +7,7 @@
 npm install
 ```
 ### Test Chain
-``
+```
 cd test
 eris keys import chain-config/export-account
 eris chains new hello --dir chain-config
