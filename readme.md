@@ -26,6 +26,6 @@ eris pkgs do -c hello -a $account
 - Use a REST client / browser with the following URLs:
  - POST http://localhost:3080/deals Body: `{"id": "234232", "buyer": "Mike", "seller": "Laura", "amount": 23984}`
  - GET http://localhost:3080/deals
- - GET http://localhost:3080/deal/<id>
+ - GET http://localhost:3080/deal/234232
 
 **NOTE**: the application currently does not support conversion of decimal input, so only full integer amounts can be stored.
