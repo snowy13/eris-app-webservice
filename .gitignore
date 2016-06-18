@@ -1,0 +1,13 @@
+
+# IDE-generated
+.idea
+.mix
+package
+
+# Compiler-generated
+abi
+epm.json
+
+# Other
+node_modules
+logs
