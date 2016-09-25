@@ -17,7 +17,7 @@ eris chains new hello --dir chain-config
 In Bash Shell:
 ```
 cd contracts
-account=$(sed -n -e '/Address/ s/.*Address\":\"\([[:alnum:]]*\)\".*$/\1/p' ../test/chain-config/export-account)
+account=$(sed -n -e '/Id/ s/.*Id\":\"\([[:alnum:]]*\)\".*$/\1/p' ../test/chain-config/export-account)
 eris pkgs do -c hello -a $account
 ```
 
