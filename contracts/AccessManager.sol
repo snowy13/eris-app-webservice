@@ -1,12 +1,17 @@
 
-import "Deal.sol";
+import "Identity.sol";
+import "Credentials.sol";
+import "Saflok.sol";
+
 
 /**
- * Contract to create and store deals
+ * Contract to create and store identity and link to credentials and saflok
  */
-contract DealManager {
+contract IdentityManager {
 
-    event NewDeal(address contractAddress, bytes32 id, bytes32 buyer, bytes32 seller, uint amount);
+    event NewIdentity(address contractAddress, bytes32 id, bytes32 name);
+    event NewCredentials(address contractAddress, bytes32 id, bool hasCredentials);
+    event NewSaflok(address contractAddress, bytes32 id, bytes32 expiryDate, bytes32 expiryTime, bytes32 room);
 
     // main map
     mapping(bytes32 => AddressElement) map;
@@ -121,12 +126,37 @@ contract DealManager {
     }
 
     /**
-     * Adds a new deal with the specified attributes
+     * Adds a new identity with the specified attributes
      */
-    function addDeal(bytes32 _id, bytes32 _buyer, bytes32 _seller, uint _amount) returns (bool) {
-        Deal deal = new Deal(_id, _buyer, _seller, _amount);
-        insert(_id, deal);
-        NewDeal(deal, deal.id(), deal.buyer(), deal.seller(), deal.amount());
+    function addIdentity(bytes32 _id, bytes32 _name) returns (bool) {
+        Identity identity = new Identity(_id, _name);
+        insert(_id, identity);
+        NewIdentity(identity, identity.id(), identity.name());
+        return true;
+    }
+
+
+/**
+     * Adds credentials to an identity
+     */
+    function addCredentials(bytes32 _id, bool _hasCredentials) returns (bool) {
+        Credentials credentials = new Credentials(_id, _hasCredentials);
+        insert(_id, credentials);
+        NewCredentials(credentials, credentials.id(), credentials.hasCredentials());
+        return true;
+    }
+
+
+/**
+     * Creates a Saflok key
+     */
+    function createSaflokKey(bytes32 _id, 
+                             bytes32 _expiryDate, 
+                             bytes32 _expiryTime, 
+                             bytes32 _room) returns (bool) {
+        Saflok saflok = new Saflok(_id, _expiryDate, _expiryTime, _room);
+        insert(_id, saflok);
+        NewSaflok(saflok, saflok.id(), saflok.expiryDate(), saflok.expiryTime(), saflok.room());
         return true;
     }
 
